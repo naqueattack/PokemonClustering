@@ -1,12 +1,16 @@
 # PokemonClustering
-##Clustering Project based off Pokemon stats
+## Clustering Project based off Pokemon stats
 
 One of the most prominent ways to divide Pokemon is by their type (e.g. Fire, Water, etc.). This tells you a lot about a Pokemon: their strengths, weaknesses, what moves they can use, etc. However, there are an awful lot of types at this point (18 as of the latest generation which is a bit much to think about all at once). Is there another way to cluster Pokemon than by type to see their potential in battle? Let's find out!
-List of Pokemon types for the uninitiatedIn this post we'll be looking over Pokemon Generation 1–8 and seeing how we can group without using type information. We'll be using a Data Science technique called clustering which is a form of unsupervised machine learning that can take input data and group it based on its characteristics. 
+List of Pokemon types for the uninitiated
+
+In this project I looked at Pokemon Generation 1–8 and seeing how I could group without using type information. I used K-means clustering to group them
+
 Each Pokemon has a number of governing 'stats' that determine how strong it is in terms of making attacks, how fast it is, and how much damage it can take in battle. These 'stats' differ across Pokemon so even Pokemon of the same type can have wildly different stats. If we add up all the stats for a Pokemon we'll have a rating of their total stat points which gives an idea of how powerful the Pokemon is overall. Some Pokemon (particularly those who are 'unevolved') will have lower stat totals. I've excluded the more 'special' Pokemon like Legendaries to keep things on a relatively even playing field.
+
 With that out of the way let's dive in. The stats that we're using as inputs to our model are as follows:
 
-![types](images/Types.PNG)
+![types](images/Types.png)
 
 1. HP (Hit Points) - Ability to take damage without fainting
 2. Attack - Power of physical attacks
@@ -18,7 +22,8 @@ With that out of the way let's dive in. The stats that we're using as inputs to 
 
 There are plenty of other features about a Pokemon (such as how long it takes to hatch from an egg, or how friendly it is to start off with), but none of these tie in directly with battling. Others like 'ability' are often 1:1 with specific Pokemon evolution lines. For simplicity, we'll stick with the basics.
 
-##Clustering
+## Clustering
+
 I used K-means as my method of clustering. K-means attempts to break data down into K number of clusters according to their center points (or centroids). It's an iterative process where it randomly picks a point at first for each centroid and then with each iteration the centroids are moved to better represent the data. We do this by minimizing error (distances between points and their cluster centroid). The better each cluster centroid represents the data in the cluster, the lower the error.
 I won't get into the math here, but its enough to know that what we're trying to develop clusters using their center points. 
 Note: K-Means works best on 'blobular' data. 
@@ -39,7 +44,8 @@ Below is a PCA chart for both cluster groups. Both groups lost a lot of informat
 First two PCs for each of strong Pokemon (left) and small Pokemon (right), colored by clusterFor more info on the topic of PCA I'll point you to StatQuest
 ![PCA](images/PCA.PNG)
 
-##Strong Pokemon Clusters
+## Strong Pokemon Clusters
+
 Let's take a look at how our abilities mapped to each cluster:
 Strong Pokemon Radar Plot - Scaled 0 to 1 with 1 being the maximum mean among clusters
 ![radar](images/clusters.PNG)
@@ -72,6 +78,7 @@ Radar Plot & Proportion of Types within Cluster 
 ![bar](images/cluster_4_bar.PNG)
 
 ##Small Pokemon Clusters
+
 For our small Pokemon our clusters also corresponded to stats, but much more broadly. It is worth noting that many of the weaker Pokemon in the games tend to be water, grass, normal and bug as these are some of the most common 'early game' Pokemon:
 Small Pokemon Radar Plot - Scaled 0 to 1 with 1 being the maximum mean among clusters
 
