@@ -29,51 +29,61 @@ I won't get into the math here, but its enough to know that what we're trying to
 Note: K-Means works best on 'blobular' data. 
 
 Almost immediately we run into an issue which will effect clustering. We have a bimodal distribution of points with some weaker (unevolved) Pokemon on the left and stronger Pokemon on the right. If we run a clustering on these groups we'll pretty much always get two clusters (small and strong) which isn't very interesting.
+
 ![Histogram](images/Histogram.png)
 
 
 I opted to separate these groups into two separate sets of clusters around Total Points of 350. We'll refer to these as small Pokemon (≤ 350) and strong Pokemon(>350) from now on.
 In other words, we don't want to compare Caterpie (left) to Typhlosion (right)
+
 ![comparison](images/Pokemon.png)
 
 With that out of the way we can get to the clusters. I opted for Silhouette coefficient as my means of determining K (the number of clusters). Silhouette is essentially a measure of how similar each datapoint is to those in its own cluster compared to others. When looking at it we're going for the maximum score, so in the case of the graph below we see that 5 is the optimum solution for strong Pokemon. Repeating this approach for the small Pokemon we find 3 clusters.
+
 ![K](images/K.png)
 
 Unfortunately, its impossible for humans to create much less comprehend a graph that could easily represent all our data points. Therefore, for representation of my clusters I'll be using PCA. PCA or Principle Components Analysis is a method for combining variables into PCs or Principle Components. This can be helpful in cases like these to represent our data in a two dimensional space. When we do this we do lose some information as not everything can generally be contained in 2 (or even 3) PCs.
 Below is a PCA chart for both cluster groups. Both groups lost a lot of information being confined to only two PCs, so take these with a grain of salt. In particular, the strong Pokemon clusters sit on top of eachother with just a couple PCs.
 First two PCs for each of strong Pokemon (left) and small Pokemon (right), colored by clusterFor more info on the topic of PCA I'll point you to StatQuest
+
 ![PCA](images/PCA.png)
 
 ## Strong Pokemon Clusters
 
 Let's take a look at how our abilities mapped to each cluster:
 Strong Pokemon Radar Plot - Scaled 0 to 1 with 1 being the maximum mean among clusters
+
 ![radar](images/clusters.png)
 
 For strong Pokemon our clusters correspond to the following stats:
 
 Cluster 0: Lower stats across the board, tended to be middle Pokemon in 3 Pokemon evolutionary chains or weaker Pokemon even when evolved.
 Radar Plot & Proportion of Types within Cluster 
+
 ![radar](images/cluster_0.png)
 ![bar](images/cluster_0_bar.png)
 
 Cluster 1: High special attack, special defense and speed. This group contains a lot of 'special' types like Psychic and Fire
 Radar Plot & Proportion of Types within Cluster 
+
 ![radar](images/cluster_1.png)
 ![bar](images/cluster_1_bar.png)
 
 Cluster 2: High HP Pokemon (e.g. Chansey). This group is dominated by Water, Normal and Ground types who tend to be chunkier.
 Radar Plot & Proportion of Types within Cluster 
+
 ![radar](images/cluster_2.png)
 ![bar](images/cluster_2_bar.png)
 
 Cluster 3: High stats in everything, but particularly both attacks, special defense and speed. Lots of Dragon type and pseudo-legendary Pokemon in this group.
 Radar Plot & Proportion of Types within Cluster 
+
 ![radar](images/cluster_3.png)
 ![bar](images/cluster_3_bar.png)
 
 Cluster 4: High defense Pokemon. Primarily steel and rock types with higher natural defenses
 Radar Plot & Proportion of Types within Cluster 
+
 ![radar](images/cluster_4.png)
 ![bar](images/cluster_4_bar.png)
 
